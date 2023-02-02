@@ -1,0 +1,106 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:8040401623683141743",
+      "lastPropertyId": "6:1033220766256492284",
+      "name": "Card",
+      "properties": [
+        {
+          "id": "1:4930351528216716176",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3220331530701390801",
+          "name": "frente",
+          "type": 9
+        },
+        {
+          "id": "3:2891774294988224786",
+          "name": "tras",
+          "type": 9
+        },
+        {
+          "id": "4:4068866975288834890",
+          "name": "createAt",
+          "type": 10
+        },
+        {
+          "id": "5:2108627787846883660",
+          "name": "conjuntoId",
+          "indexId": "1:6268814347701380870",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "Conjunto"
+        },
+        {
+          "id": "6:1033220766256492284",
+          "name": "revisaoId",
+          "indexId": "2:5591287322379025340",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "Revisao"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:6967017757445175643",
+      "lastPropertyId": "2:6529442684250055855",
+      "name": "Conjunto",
+      "properties": [
+        {
+          "id": "1:7666200464898650310",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6529442684250055855",
+          "name": "nome",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4730226236174934719",
+      "lastPropertyId": "3:3815531319901750899",
+      "name": "Revisao",
+      "properties": [
+        {
+          "id": "1:8673538467751398268",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8564024227297108168",
+          "name": "updateAt",
+          "type": 10
+        },
+        {
+          "id": "3:3815531319901750899",
+          "name": "proximaRevisao",
+          "type": 10
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:4730226236174934719",
+  "lastIndexId": "2:5591287322379025340",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
