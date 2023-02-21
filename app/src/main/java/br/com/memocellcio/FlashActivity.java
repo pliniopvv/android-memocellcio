@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +47,9 @@ public class FlashActivity extends Activity {
 
         setTitle(title);
 
-        List<Card> listaCardsBox = DBFactory.get().boxFor(Card.class).query().equal(Card_.conjuntoId, id).build().find();
+        List<Card> listaCardsBox = DBFactory.get().boxFor(Card.class).query()
+                .equal(Card_.conjuntoId, id)
+                .build().find();
         listaCards = new ArrayList<>();
         Date hoje = new Date();
         for (Card c : listaCardsBox) {
@@ -54,7 +57,7 @@ public class FlashActivity extends Activity {
             if (r == null) {
                 listaCards.add(c);
                 continue;
-            }
+            } // else
             Date d = r.proximaRevisao;
             if (hoje.after(d)) {
                 listaCards.add(c);
@@ -127,8 +130,15 @@ public class FlashActivity extends Activity {
         if (r == null) {
             Revisao _r = new Revisao();
             _r.proximaRevisao = new Date();
-            long tempo = _r.proximaRevisao.getTime() + 60 * 60 * 24 * 4; // 60 * 60 * 24 * 4 -> 4 dias
-            _r.proximaRevisao.setTime(tempo);
+//            long tempo = _r.proximaRevisao.getTime() + 60 * 60 * 24 * 4; // 60s * 60m * 24h * 4d -> 4 dias
+
+            // 4 dias
+            Calendar c = Calendar.getInstance();
+            c.setTime(_r.proximaRevisao);
+            c.add(Calendar.DATE, 4);
+            _r.proximaRevisao = c.getTime();
+
+//            _r.proximaRevisao.setTime(tempo);
             Box<Revisao> boxRevisao = DBFactory.get().boxFor(Revisao.class);
             Box<Card> boxCard = DBFactory.get().boxFor(Card.class);
             boxRevisao.put(_r);
@@ -144,8 +154,15 @@ public class FlashActivity extends Activity {
         if (r == null) {
             Revisao _r = new Revisao();
             _r.proximaRevisao = new Date();
-            long tempo = _r.proximaRevisao.getTime() + 60 * 60 * 24 * 1; // 60 * 60 * 24 * 1 -> 1 dia
-            _r.proximaRevisao.setTime(tempo);
+//            long tempo = _r.proximaRevisao.getTime() + 60 * 60 * 24 * 1; // 60 * 60 * 24 * 1 -> 1 dia
+
+            // 1 dias
+            Calendar c = Calendar.getInstance();
+            c.setTime(_r.proximaRevisao);
+            c.add(Calendar.DATE, 1);
+            _r.proximaRevisao = c.getTime();
+
+//            _r.proximaRevisao.setTime(tempo);
             Box<Revisao> boxRevisao = DBFactory.get().boxFor(Revisao.class);
             Box<Card> boxCard = DBFactory.get().boxFor(Card.class);
             boxRevisao.put(_r);
@@ -161,8 +178,15 @@ public class FlashActivity extends Activity {
         if (r == null) {
             Revisao _r = new Revisao();
             _r.proximaRevisao = new Date();
-            long tempo = _r.proximaRevisao.getTime() + 60 * 10; // 60 * 60 * 24 * 1 -> 1 dia
-            _r.proximaRevisao.setTime(tempo);
+//            long tempo = _r.proximaRevisao.getTime() + 60 * 10; // 60 * 60 * 24 * 1 -> 1 dia
+
+            // 30 minutos
+            Calendar c = Calendar.getInstance();
+            c.setTime(_r.proximaRevisao);
+            c.add(Calendar.MINUTE, 30);
+            _r.proximaRevisao = c.getTime();
+
+//            _r.proximaRevisao.setTime(tempo);
             Box<Revisao> boxRevisao = DBFactory.get().boxFor(Revisao.class);
             Box<Card> boxCard = DBFactory.get().boxFor(Card.class);
             boxRevisao.put(_r);
@@ -215,6 +239,7 @@ public class FlashActivity extends Activity {
                         continue;
                     }
                     if (tmp_tempo_total == 0) {
+                        tmp_tempo_total = 40;
                         runOnUiThread(() -> {
                             resetContadores();
                             nextCard();
