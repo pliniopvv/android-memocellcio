@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +63,10 @@ public class FlashActivity extends Activity {
             if (hoje.after(d)) {
                 listaCards.add(c);
             }
+
         }
+
+        listaCards.sort(Comparator.comparing(Card::getId));
 
         Collections.sort(listaCards, (o1, o2) -> {
             Revisao r1 = o1.revisao.getTarget();

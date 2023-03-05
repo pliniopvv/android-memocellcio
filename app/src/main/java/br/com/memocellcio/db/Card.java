@@ -35,4 +35,7 @@ public class Card {
     public ToOne<Conjunto> conjunto;
     public ToOne<Revisao> revisao;
 
+    public long getId() {
+        return this.id;
+    }
 }
